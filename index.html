@@ -15,7 +15,7 @@
   var canvas = document.querySelector("canvas");
   var width = window.innerWidth;
   var height = window.innerHeight;
-//   var context = canvas.getContext("2d");
+  var context = canvas.getContext("2d");
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
   canvas.style.padding = 0;
@@ -35,8 +35,8 @@
 
 
   function draw() {
-      canvas.drawImage(face, mouseX, mouseY,200,200);
-      canvas.drawImage(eyes, mouseX, mouseY,200,200);
+      context.drawImage(face, mouseX, mouseY,200,200);
+      context.drawImage(eyes, mouseX, mouseY,200,200);
   }
 
 
