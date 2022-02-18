@@ -15,7 +15,7 @@
   var canvas = document.querySelector("canvas");
   var width = window.innerWidth;
   var height = window.innerHeight;
-  var context = canvas.getContext("2d");
+//   var context = canvas.getContext("2d");
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
   canvas.style.padding = 0;
@@ -31,22 +31,22 @@
   var nose = new Image();
   nose.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p4.png";
 
-  //canvas.addEventListener('mousemove', getMouse, false);
+  canvas.addEventListener('mousemove', getMouse, false);
 
-  canvas.drawImage(face, 400, 400,200,200);
 
   function draw() {
-    
+      canvas.drawImage(face, mouseX, mouseY,200,200);
+      canvas.drawImage(eyes, mouseX, mouseY,200,200);
   }
 
 
   window.requestAnimationFrame(draw);
 
 
-//   function getMouse(mousePosition) {
-//               mouseX = mousePosition.layerX;
-//               mouseY = mousePosition.layerY;
-//       }
+  function getMouse(mousePosition) {
+              mouseX = mousePosition.layerX;
+              mouseY = mousePosition.layerY;
+      }
 
 </script>
 </html>
