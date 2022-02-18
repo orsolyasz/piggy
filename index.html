@@ -20,7 +20,7 @@
   canvas.setAttribute("height", height);
   canvas.style.padding = 0;
   canvas.style.margin=-0.01*height;
-  canvas.style.backgroundColor = "black";
+ // canvas.style.backgroundColor = "black";
 
   var face = new Image();
   face.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p1.png";
@@ -31,7 +31,7 @@
   var nose = new Image();
   nose.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p4.png";
 
-  canvas.addEventListener('mousemove', getMouse, false);
+  //canvas.addEventListener('mousemove', getMouse, false);
     
       context.drawImage(face, mouseX, mouseY,200,200);
       context.drawImage(eyes, mouseX, mouseY,200,200);
