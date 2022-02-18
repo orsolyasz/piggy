@@ -1,57 +1,157 @@
 <html>
 <head>
-
+   <script src = "https://mimicproject.com/libs/maximilian.js"></script>
+   <link href=
+'https://fonts.googleapis.com/css?family=Shizuru'
+         rel='stylesheet' />
 </head>
 
 <body>
-    <canvas></canvas>
+    <canvas id="myCanvas"></canvas>
 
 </body>
 <script type="text/javascript">
 
-  var mouseX =width/2;
-  var mouseY =height/2;
-
-  var canvas = document.querySelector("canvas");
   var width = window.innerWidth;
   var height = window.innerHeight;
+  textshow=0;
+
+  var mouseX =400;
+  var mouseY =400;
+
+  var pos1x= Math.floor((Math.random() * width*.6) + 100);
+  var pos1y= Math.floor((Math.random() * height*0.6) + 100);
+  var size1 = Math.floor(Math.random()*100)+150;
+  var v1x =3;
+  var v1y =2;
+
+  var pos2x= Math.floor((Math.random() * (width*0.8-200)+100));
+  var pos2y= Math.floor((Math.random() * (height*0.8-200)+100));
+  var size2 = Math.floor(Math.random()*200)+100;
+  var v2x =1;
+  var v2y =-1;
+
+  var pos3x= Math.floor((Math.random() * width*.3) + 1);
+  var pos3y= Math.floor((Math.random() * height*.3) + 1);
+  var size3 = Math.floor(Math.random()*100)+150;
+  var v3x=-2;
+  var v3y=2;
+
+
+//  var canvas = document.querySelector("canvas");
+  canvas = document.getElementById("myCanvas");
   var context = canvas.getContext("2d");
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
   canvas.style.padding = 0;
   canvas.style.margin=-0.01*height;
- // canvas.style.backgroundColor = "black";
+  canvas.style.backgroundColor = "black";
+  canvas.addEventListener('mousemove', getMouse, false);
+  canvas.addEventListener('mousedown', showText, false);
+
 
   var face = new Image();
+  // face.onload = function(){
+  //   // context.drawImage(face, 400, 400,200,200);
+  //   console.log("loaded");
+  // };
   face.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p1.png";
+
   var eyes = new Image();
   eyes.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p2.png";
+
   var ears = new Image();
   ears.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p3.png";
+
   var nose = new Image();
   nose.src = "https://raw.githubusercontent.com/orsolyasz/piggy/main/p4.png";
 
-  //canvas.addEventListener('mousemove', getMouse, false);
-    
-      context.drawImage(face, mouseX, mouseY,200,200);
-      context.drawImage(eyes, mouseX, mouseY,200,200);
-    canvas.drawImage(face, mouseX, mouseY,200,200);
-    canvas.drawImage(eyes, mouseX, mouseY,200,200);
+
 
 
   function draw() {
-      context.drawImage(face, mouseX, mouseY,200,200);
-      context.drawImage(eyes, mouseX, mouseY,200,200);
-  }
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
+      if (textshow==1){
+      context.font = "30px Shizuru";
+      context.fillStyle = "white";
+      context.textAlign = "center";
+      context.fillText("HOW MANY 🐷 ?", width*0.5, height*0.4);
+    }
 
-  window.requestAnimationFrame(draw);
+      drawFace(pos1x,pos1y,size1);
+      drawFace(pos2x,pos2y,size2);
+      drawFace(pos3x,pos3y,size3);
+
+      pos1x=pos1x+v1x*0.2;
+      pos1y=pos1y+v1y*0.2;
+      pos2x=pos2x+v2x*0.2;
+      pos2y=pos2y+v2y*0.2;
+      pos3x=pos3x+v3x*0.2;
+      pos3y=pos3y+v3y*0.2;
+
+      if(pos1x>width-size1 || pos1x<0){
+        v1x=-v1x;
+      }
+
+      if(pos1y>height-size1 || pos1y<0 ){
+        v1y=-v1y;
+      }
+
+      if(pos2x>width-size2 || pos2x<0 ){
+        v2x=-v2x;
+      }
+
+      if(pos2y>height-size2  || pos2y<0){
+        v2y=-v2y;
+      }
+
+      if(pos3x>width-size3 || pos3x<0){
+        v3x=-v3x;
+      }
+
+      if(pos3y>height-size3 || pos3y<0){
+        v3y=-v3y;
+      }
+
+      //requestAnimationFrame(draw);
+    }
+
+//  requestAnimationFrame(draw);
+
+ setInterval(draw, 1000/50);
 
 
   function getMouse(mousePosition) {
-              mouseX = mousePosition.layerX;
-              mouseY = mousePosition.layerY;
+        mouseX = mousePosition.layerX;
+        mouseY = mousePosition.layerY;
+      //   console.log(mouseX);
+      //
+      //   context.clearRect(0, 0, canvas.width, canvas.height);
+      //
+      //   if(textshow==1){
+      //   context.font = "30px Shizuru";
+      //   context.fillStyle = "white";
+      //   context.textAlign = "center";
+      //   context.fillText("HOW MANY 🐷 ?", width*0.5, height*0.4);
+      // }
+      //
+      //   drawFace(pos1x,pos1y,size1);
+      //   drawFace(pos2x,pos2y,size2);
+      //   drawFace(pos3x,pos3y,size3);
       }
+
+  function showText(){
+    textshow=1;
+  }
+
+
+  function drawFace(x,y,size){
+    context.drawImage(face, x, y,size,size);
+    context.drawImage(eyes, x+(mouseX-x)*0.02, y+(mouseY-y)*0.02,size,size);
+    context.drawImage(nose, x+(mouseX-x)*0.01, y+(mouseY-y)*0.01,size,size);
+    context.drawImage(ears, x+(mouseX-x)*0.005, y+(mouseY-y)*0.005,size,size);
+  }
 
 </script>
 </html>
